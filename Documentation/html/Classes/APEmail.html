@@ -1,0 +1,912 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>APEmail Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">Appacitve-iOS-SDK </a></h1>
+				<a id="developerHome" href="../index.html">Appacitive software</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">APEmail Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:">&nbsp;&nbsp;&nbsp;&nbsp;+ makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initWithRecipients:subject:body:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRecipients:subject:body:</option>
+	
+	<option value="//api/name/sendEmail">&nbsp;&nbsp;&nbsp;&nbsp;- sendEmail</option>
+	
+	<option value="//api/name/sendEmailUsingSMTPConfig:">&nbsp;&nbsp;&nbsp;&nbsp;- sendEmailUsingSMTPConfig:</option>
+	
+	<option value="//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- sendEmailUsingSMTPConfig:successHandler:failureHandler:</option>
+	
+	<option value="//api/name/sendEmailWithSuccessHandler:failureHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- sendEmailWithSuccessHandler:failureHandler:</option>
+	
+	<option value="//api/name/sendTemplatedEmailUsingTemplate:">&nbsp;&nbsp;&nbsp;&nbsp;- sendTemplatedEmailUsingTemplate:</option>
+	
+	<option value="//api/name/sendTemplatedEmailUsingTemplate:successHandler:failureHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- sendTemplatedEmailUsingTemplate:successHandler:failureHandler:</option>
+	
+	<option value="//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:">&nbsp;&nbsp;&nbsp;&nbsp;- sendTemplatedEmailUsingTemplate:usingSMTPConfig:</option>
+	
+	<option value="//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:">makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRecipients:subject:body:">initWithRecipients:subject:body:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendEmail">sendEmail</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendEmailUsingSMTPConfig:">sendEmailUsingSMTPConfig:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">sendEmailUsingSMTPConfig:successHandler:failureHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendEmailWithSuccessHandler:failureHandler:">sendEmailWithSuccessHandler:failureHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendTemplatedEmailUsingTemplate:">sendTemplatedEmailUsingTemplate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendTemplatedEmailUsingTemplate:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:successHandler:failureHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="APEmail Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">APEmail Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">APEmail.h<br />APEmail.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The APEmail class allows you to send requests to the appactive API to send out emails.
+<a href="../Classes/Appacitive.html">Appacitive</a> offers two types of emails.
+The simple email is a type of an email where you create the email body content on you own.
+The templated email is a type of an email where you create an email template on the <a href="../Classes/Appacitive.html">Appacitive</a> portal with placeholders and then use tht template name to send the email to recipients by customizing the placeholders of the template.
+<a href="../Classes/Appacitive.html">Appacitive</a> also provides you with an option to use your own SMTP server configuration if you wish top use an SMTP server that is different than the one provided by <a href="../Classes/Appacitive.html">Appacitive</a>.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithRecipients:subject:body:">&ndash;&nbsp;initWithRecipients:subject:body:</a></code>
+		<span class="tooltip"><p>Method to instantiate an email object with minimum number of requierd properties.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendEmail">&ndash;&nbsp;sendEmail</a></code>
+		<span class="tooltip"><p><a href="#//api/name/sendEmailWithSuccessHandler:failureHandler:">sendEmailWithSuccessHandler:failureHandler:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendEmailWithSuccessHandler:failureHandler:">&ndash;&nbsp;sendEmailWithSuccessHandler:failureHandler:</a></code>
+		<span class="tooltip"><p>Method to send a simple email.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendEmailUsingSMTPConfig:">&ndash;&nbsp;sendEmailUsingSMTPConfig:</a></code>
+		<span class="tooltip"><p><a href="#//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">sendEmailUsingSMTPConfig:successHandler:failureHandler:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">&ndash;&nbsp;sendEmailUsingSMTPConfig:successHandler:failureHandler:</a></code>
+		<span class="tooltip"><p>Method to send a simple email</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:">&ndash;&nbsp;sendTemplatedEmailUsingTemplate:usingSMTPConfig:</a></code>
+		<span class="tooltip"><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendTemplatedEmailUsingTemplate:">&ndash;&nbsp;sendTemplatedEmailUsingTemplate:</a></code>
+		<span class="tooltip"><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendTemplatedEmailUsingTemplate:successHandler:failureHandler:">&ndash;&nbsp;sendTemplatedEmailUsingTemplate:successHandler:failureHandler:</a></code>
+		<span class="tooltip"><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">&ndash;&nbsp;sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></code>
+		<span class="tooltip"><p>Mehtod to send a templated email.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:">+&nbsp;makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:</a></code>
+		<span class="tooltip"><p>Helper method to create a dictionary object with SMTP Configuration parameters</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:" title="makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:"></a>
+	<h3 class="subsubtitle method-title">makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Helper method to create a dictionary object with SMTP Configuration parameters</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSDictionary *)makeSMTPConfigurationDictionaryWithUsername:(NSString *)<em>username</em> password:(NSString *)<em>password</em> host:(NSString *)<em>host</em> port:(NSNumber *)<em>port</em> enableSSL:(BOOL)<em>enableSSL</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>username</em></dt>
+			<dd><p>Username for the account on SMTP server.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>password</em></dt>
+			<dd><p>Password for the account on SMTP server.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>host</em></dt>
+			<dd><p>SMTP server host url.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>port</em></dt>
+			<dd><p>SMTP server port.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>enableSSL</em></dt>
+			<dd><p>Whether to user SSL or not.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithRecipients:subject:body:" title="initWithRecipients:subject:body:"></a>
+	<h3 class="subsubtitle method-title">initWithRecipients:subject:body:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Method to instantiate an email object with minimum number of requierd properties.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithRecipients:(NSArray *)<em>recipients</em> subject:(NSString *)<em>subject</em> body:(NSString *)<em>body</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>recipients</em></dt>
+			<dd><p>An array of email addresses of the recipients of the email.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>subject</em></dt>
+			<dd><p>Subject for the email.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>body</em></dt>
+			<dd><p>Content of the email.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendEmail" title="sendEmail"></a>
+	<h3 class="subsubtitle method-title">sendEmail</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/sendEmailWithSuccessHandler:failureHandler:">sendEmailWithSuccessHandler:failureHandler:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendEmail</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/sendEmailWithSuccessHandler:failureHandler:">&ndash; sendEmailWithSuccessHandler:failureHandler:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendEmailUsingSMTPConfig:" title="sendEmailUsingSMTPConfig:"></a>
+	<h3 class="subsubtitle method-title">sendEmailUsingSMTPConfig:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">sendEmailUsingSMTPConfig:successHandler:failureHandler:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendEmailUsingSMTPConfig:(NSDictionary *)<em>smtpConfig</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:">&ndash; sendEmailUsingSMTPConfig:successHandler:failureHandler:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendEmailUsingSMTPConfig:successHandler:failureHandler:" title="sendEmailUsingSMTPConfig:successHandler:failureHandler:"></a>
+	<h3 class="subsubtitle method-title">sendEmailUsingSMTPConfig:successHandler:failureHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Method to send a simple email</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendEmailUsingSMTPConfig:(NSDictionary *)<em>smtpConfig</em> successHandler:(APSuccessBlock)<em>successBlock</em> failureHandler:(APFailureBlock)<em>failureBlock</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>smtpConfig</em></dt>
+			<dd><p>A dictionary with smtp configuration parameters.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is successful.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>failureBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is unsuccessful.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> To send an email the following properties of the email object MUST be set: toRecipients, subjectText, bodyText.</p>
+
+<p>To make a SMTP configuration dictionary, use the &lsquo;makeSMTPConfigurationDictionaryWithUsername:password:host:port:enableSSL:&rsquo; method.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendEmailWithSuccessHandler:failureHandler:" title="sendEmailWithSuccessHandler:failureHandler:"></a>
+	<h3 class="subsubtitle method-title">sendEmailWithSuccessHandler:failureHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Method to send a simple email.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendEmailWithSuccessHandler:(APSuccessBlock)<em>successBlock</em> failureHandler:(APFailureBlock)<em>failureBlock</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is successful.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>failureBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is unsuccessful.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> To send an email the following properties of the email object MUST be set: toRecipients, subjectText, bodyText</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendTemplatedEmailUsingTemplate:" title="sendTemplatedEmailUsingTemplate:"></a>
+	<h3 class="subsubtitle method-title">sendTemplatedEmailUsingTemplate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendTemplatedEmailUsingTemplate:(NSString *)<em>templateName</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">&ndash; sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendTemplatedEmailUsingTemplate:successHandler:failureHandler:" title="sendTemplatedEmailUsingTemplate:successHandler:failureHandler:"></a>
+	<h3 class="subsubtitle method-title">sendTemplatedEmailUsingTemplate:successHandler:failureHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendTemplatedEmailUsingTemplate:(NSString *)<em>templateName</em> successHandler:(APSuccessBlock)<em>successBlock</em> failureHandler:(APFailureBlock)<em>failureBlock</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">&ndash; sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:" title="sendTemplatedEmailUsingTemplate:usingSMTPConfig:"></a>
+	<h3 class="subsubtitle method-title">sendTemplatedEmailUsingTemplate:usingSMTPConfig:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendTemplatedEmailUsingTemplate:(NSString *)<em>templateName</em> usingSMTPConfig:(NSDictionary *)<em>smtpConfig</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:">&ndash; sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:" title="sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:"></a>
+	<h3 class="subsubtitle method-title">sendTemplatedEmailUsingTemplate:usingSMTPConfig:successHandler:failureHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Mehtod to send a templated email.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)sendTemplatedEmailUsingTemplate:(NSString *)<em>templateName</em> usingSMTPConfig:(NSDictionary *)<em>smtpConfig</em> successHandler:(APSuccessBlock)<em>successBlock</em> failureHandler:(APFailureBlock)<em>failureBlock</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>templateName</em></dt>
+			<dd><p>name of the template configured on the <a href="../Classes/Appacitive.html">Appacitive</a> portal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>smtpConfig</em></dt>
+			<dd><p>A dictionary with smtp configuration parameters.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is successful.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>failureBlock</em></dt>
+			<dd><p>Block invoked when the email sending operation is unsuccessful.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">APEmail.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2014 Appacitive software. All rights reserved. (Last updated: 2014-03-24)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
