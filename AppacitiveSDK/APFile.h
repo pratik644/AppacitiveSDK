@@ -22,17 +22,17 @@
 /**
  @see uploadFileWithName:data:validUrlForTime:contentType:successHandler:failureHandler:
  */
-- (void) uploadFileWithName:(NSString*)name data:(NSData*)fileData validUrlForTime:(NSNumber*)minutes;
++ (void) uploadFileWithName:(NSString*)name data:(NSData*)fileData validUrlForTime:(NSNumber*)minutes;
 
 /**
  @see uploadFileWithName:data:validUrlForTime:contentType:successHandler:failureHandler:
  */
-- (void) uploadFileWithName:(NSString*)name data:(NSData*)fileData validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType;
++ (void) uploadFileWithName:(NSString*)name data:(NSData*)fileData validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType;
 
 /**
  @see uploadFileWithName:data:validUrlForTime:contentType:successHandler:failureHandler:
  */
-- (void) uploadFileWithName:(NSString *)name data:(NSData *)fileData validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType successHandler:(APResultSuccessBlock)successBlock;
++ (void) uploadFileWithName:(NSString *)name data:(NSData *)fileData validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType successHandler:(APResultSuccessBlock)successBlock;
 
 /**
  Method used to upload data to the remote server
@@ -43,14 +43,14 @@
  @param successBlock Block invoked when upload is successful.
  @param failureBlock Block invoked when upload fails.
  */
-- (void) uploadFileWithName:(NSString *)name data:(NSData *)data validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType successHandler:(APResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) uploadFileWithName:(NSString *)name data:(NSData *)data validUrlForTime:(NSNumber*)minutes contentType:(NSString*)contentType successHandler:(APResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /** @name Downloading data form Appacitive */
 
 /**
  @see downloadFileWithName:validUrlForTime:successHandler:failureHandler:
  */
-- (void) downloadFileWithName:(NSString*)name validUrlForTime:(NSNumber*)minutes successHandler:(APFileDownloadSuccessBlock) successBlock;
++ (void) downloadFileWithName:(NSString*)name validUrlForTime:(NSNumber*)minutes successHandler:(APFileDownloadSuccessBlock) successBlock;
 
 /**
  Method used to download data from the remote server
@@ -59,7 +59,7 @@
  @param successBlock Block invoked when download is successful
  @param failureBlock Block invoked when download fails
  */
-- (void) downloadFileWithName:(NSString*)name validUrlForTime:(NSNumber*)minutes successHandler:(APFileDownloadSuccessBlock) successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) downloadFileWithName:(NSString*)name validUrlForTime:(NSNumber*)minutes successHandler:(APFileDownloadSuccessBlock) successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see deleteFileWithName:successHandler:failureHandler:

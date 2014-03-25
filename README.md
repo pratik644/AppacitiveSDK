@@ -1125,15 +1125,13 @@ Appacitive supports file storage and provides api's for you to easily upload and
 ### Uploading
 
 ```objectivec
-APFile *fileObj = [[APFile alloc] init];
-[fileObj uploadFileWithName:@"BannerImage" data:[NSData dataWithContentsOfFile:@"BannerImage.png"] validUrlForTime:@10 contentType:@"image/png"];
+[APFile uploadFileWithName:@"BannerImage" data:[NSData dataWithContentsOfFile:@"BannerImage.png"] validUrlForTime:@10 contentType:@"image/png"];
 ```
 
 ### Downloading
 
 ```objectivec
-APFile *fileObj = [[APFile alloc] init];
-[fileObj downloadFileWithName:@"BannerImage" validUrlForTime:@10 successHandler:^(NSData *data) {
+[APFile downloadFileWithName:@"BannerImage" validUrlForTime:@10 successHandler:^(NSData *data) {
     UIImage *bannerImage = [UIImage imageWithData:data];
 }];
 ```
