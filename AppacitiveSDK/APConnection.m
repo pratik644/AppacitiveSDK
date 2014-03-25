@@ -362,7 +362,8 @@
     
     NSString *path = [CONNECTION_PATH stringByAppendingFormat:@"%@/%@", self.relationType, self.objectId.description];
     
-    path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     path = [HOST_NAME stringByAppendingPathComponent:path];
     NSURL *url = [NSURL URLWithString:path];
@@ -884,7 +885,8 @@
         }
     }];
     
-    path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     path = [HOST_NAME stringByAppendingPathComponent:path];
     NSURL *url = [NSURL URLWithString:path];
@@ -927,7 +929,8 @@
     else
         path = [CONNECTION_PATH stringByAppendingFormat:@"%@/%@/%@/find?returnedge=false", relationType, objectType, objectId];
     
-    path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     path = [HOST_NAME stringByAppendingPathComponent:path];
     NSURL *url = [NSURL URLWithString:path];

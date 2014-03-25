@@ -616,7 +616,8 @@ static NSDictionary *headerParams;
     NSString *path = [USER_PATH stringByAppendingFormat:@"%@",userId];
     path = [HOST_NAME stringByAppendingPathComponent:path];
     
-    path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     NSURL *url = [NSURL URLWithString:path];
     
@@ -656,7 +657,8 @@ static NSDictionary *headerParams;
     NSString *path = [USER_PATH stringByAppendingFormat:@"%@?useridtype=username",userName];
     path = [HOST_NAME stringByAppendingPathComponent:path];
     
-    path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     NSURL *url = [NSURL URLWithString:path];
     
@@ -695,7 +697,8 @@ static NSDictionary *headerParams;
     NSString *path = [USER_PATH stringByAppendingFormat:@"me?useridtype=token&token=%@",userToken];
     path = [HOST_NAME stringByAppendingPathComponent:path];
     
-    path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"&fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     NSURL *url = [NSURL URLWithString:path];
     
@@ -890,7 +893,8 @@ static NSDictionary *headerParams;
     
     NSString *path = [OBJECT_PATH stringByAppendingFormat:@"%@/%@", self.type, self.objectId];
     
-    path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
+     if(propertiesToFetch != nil || propertiesToFetch.count > 0)
+        path = [path stringByAppendingFormat:@"?fields=%@",[propertiesToFetch componentsJoinedByString:@","]];
     
     path = [HOST_NAME stringByAppendingPathComponent:path];
     NSURL *url = [NSURL URLWithString:path];
