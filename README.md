@@ -41,7 +41,6 @@ iOS client SDK for Appacitive platform.
   * [Query data tagged with all of the given tags](#query-data-tagged-with-all-of-the-given-tags)
 * [Composite Filters](#composite-filters)
 * [FreeText](#freetext)
-  * [Counts](#counts)
 * [Graph Search](#graph-search)  
   * [Creating graph queries](#creating-graph-queries)  
   * [Executing Filter graph queries](#executing-filter-graph-queries)
@@ -67,7 +66,6 @@ iOS client SDK for Appacitive platform.
   * [To List of Channels](#to-list-of-channels)  
   * [Query](#query)  
 * [Files](#files)  
-  * [Creating Appacitive.File Object](#creating-appacitivefile-object)  
   * [Uploading](#uploading)  
   * [Downloading](#downloading)
 
@@ -762,7 +760,7 @@ APUser *spencer = [[APUser alloc] init];
 [spencer createUserWithFacebook:@"Hsdfbk234kjnbkb23k4JLKJ234kjnkkJK2341nkjnJSD"];
 ```
 
-Similarly you can also create a user with Twitter Oauth v1.0 and oath v2.0.
+Similarly you can also create a user with Twitter Oauth v1.0 and Oauth v2.0.
 
 ### Retrieve
 
@@ -854,138 +852,86 @@ You can ask your users to log in via Twitter. This'll require you to implement t
 ### User Session Management
 
 Once the user has authenticated successfully, you will be provided the user's details and an access token. This access token identifies the currently logged in user and will be used to implement access control. Each instance of an app can have one logged in user at any given time.By default the SDK takes care of setting and unsetting this token. However, you can explicitly tell the SDK to start using another access token.
+
 ```objectivec
-// the access token
-// var token = /* ... */
+//Get the currently logged-in user object.
+APUser *user = [APUser currentUser];
 
-// setting it in the SDK
-Appacitive.session.setUserAuthHeader(token);
-// now the sdk will send this token with all requests to the server
-// Access control has started
+//Log out the currently logged-in user.
+[APUser logOutCurrentUser];
 
-// removing the auth token
-Appacitive.session.removeUserAuthHeader();
-// Access control has been disabled
-```
-User session validation is used to check whether the user is authenticated and his usertoken is valid or not.
-```objectivec
-
-// to check whether user is loggedin locally. This won't make any explicit apicall to validate user
-Appacitive.Users.validateCurrentUser().then(function(isValid) {
-  if(isValid) //user is logged in
-});
-// to check whether user is loggedin, explicitly making apicall to validate usertoken
-// pass true as first argument to validate usertoken making an apicall
-Appacitive.Users.validateCurrentUser(true).then(function(isValid) {
-  if (isValid)  //user is logged in
-});
+//Validate the currentUser's sesion.
+[APUser validateCurrentUserSessionWithSuccessHandler:^(NSDictionary *result) {
+    NSLog(@"Current user session is valid");
+} failureHandler:^(APError *error) {
+    NSLog(@"Current user session is invalid");
+}];
 ```
 
 ### Linking and Unlinking accounts
 
 #### Linking Facebook account
 
-**NOTE:** here, we consider that the user has already logged-in with Facebook using `Appacitive.Facebook.requestLogin` method
+**NOTE:** Here, we assume that the user has already logged-in with Facebook.
 
-If you want to associate an existing loggedin Appacitive.User to a Facebook account, you can link it like so
+If you want to associate an existing loggedin APUser to a Facebook account, you can do it as shown below.
 
 ```objectivec
-var user = Appacitive.User.current();
-user.linkFacebook(global.Appacitive.Facebook.accessToken()).then(function(obj) {
-  //You can access linked accounts of a user, using this field
-  console.dir(user.linkedAccounts());
+APUser *user = [APUser currentUser];
+[user linkFacebookAccountWithAccessToken:@"jlj4jl2lj34jl324ljhb23lj4b"];
 });
 ```
 
 #### Create Facebook linked accounts
 
-**NOTE:** here, we consider that the user has already logged-in with Facebook using `Appacitive.Facebook.requestLogin` method
+**NOTE:** Here, we assume that the user has already logged-in with Facebook.
 
-If you want to associate a new Appacitive.User to a Facebook account, you can link it like so
+If you want to associate a new APUser to a Facebook account, you can simply use the `authenticateUserWihFacebook` method.
 
-```objectivec
-//create user object
-var user = new Appacitive.User({
-  username: 'john.doe@appacitive.com',
-  password: /* password as string */,
-  email: 'johndoe@appacitive.com',
-  firstname: 'John',
-  lastname: 'Doe'
-});
 
-//link Facebook account
-user.linkFacebook(global.Appacitive.Facebook.accessToken());
-
-//create the user on server
-user.save().then(function(obj) {
-  console.dir(user.linkedAccounts());
-});
-
-```
 #### Linking Twitter account
 
-**NOTE:** here, we consider that the user has already logged-in with twitter
+**NOTE:** Here, we assume that the user has already logged-in with Twitter.
 
-If you want to associate an existing loggedin Appacitive.User to a Twitter account, you can link it like so
+If you want to associate an existing loggedin APUser to a Twitter account, you can link it like so
 
 ```objectivec
-var user = Appacitive.User.current();
-user.linkTwitter({
-  oauthtoken: {{twitterObj.oAuthToken}} ,
-  oauthtokensecret: {{twitterObj.oAuthTokenSecret}},
-  consumerKey: {{twitterObj.consumerKey}},
-  consumerSecret: {{twitterObj.consumerSecret}}
-}).then(function(obj) {
-  //You can access linked accounts of a user, using this field
-  console.dir(user.linkedAccounts());
-});
+//Oauth1.0
+[user linkTwitterAccountWithOauthToken:@"234kjb23k4bk23b4" oauthSecret:@"23d4kj32n4kjbk32bn4k"];
+
+//Oauth2.0
+ [user linkTwitterAccountWithOauthToken:@"kj3h24k234b" oauthSecret:@"23hb4jh2b3j4" consumerKey:@"2jh3lb4jh2b34" consumerSecret:@"2j3b4j234jb"];
 ```
 
 #### Create Twitter linked accounts
 
-**NOTE:** here, we consider that the user has already logged-in with twitter
+**NOTE:** Here, we assume that the user has already logged-in with Twitter.
 
-If you want to associate a new Appacitive.User to a Twitter account, you can link it like so
+If you want to associate a new APUser to a Twitter account, you can simply use the authenticateUserWithTwitter method.
+
+
+#### Retreiving linked accounts
+
 ```objectivec
-//create user object
-var user = new Appacitive.User({
-  username: 'john.doe@appacitive.com',
-  password: /* password as string */,
-  email: 'johndoe@appacitive.com',
-  firstname: 'John',
-  lastname: 'Doe'
-});
+//Retrieveing a specific linked account with service name viz. facebook or twitter.
+[user getLinkedAccountWithServiceName:@"twitter" successHandler:^(NSDictionary *result) {
+    NSLog(@"Linked twitter account details:%@",[result description]);
+}];
 
-//link Facebook account
-user.linkTwitter({
-  oauthtoken: {{twitterObj.oAuthToken}} ,
-  oauthtokensecret: {{twitterObj.oAuthTokenSecret}},
-  consumerKey: {{twitterObj.consumerKey}},
-  consumerSecret: {{twitterObj.consumerSecret}}
-});
+//Retrieving 
+[user getAllLinkedAccountsWithSuccessHandler:^(NSDictionary *result) {
+    NSLog(@"All Linked account details:%@",[result description]);
+}];
 
-//create the user on server
-user.save().then(function(obj) {
-  console.dir(user.linkedAccounts());
-});
-
-```
-
-
-#### Retreiving all linked accounts
-```objectivec
-Appacitive.Users.current().getAllLinkedAccounts().then(function() {
-  console.dir(Appacitive.Users.current().linkedAccounts());
-});
 ```
 
 #### Delinking Facebook account
+
 ```objectivec
-//specify account which needs to be delinked
-Appacitive.Users.current().unlink('Facebook').then(function() {
-  alert("Facebook account delinked successfully");
+[user delinkAccountWithServiceName:@"facebook"];
 });
 ```
+
 ### Password Management
 
 #### Reset Password
@@ -993,56 +939,23 @@ Appacitive.Users.current().unlink('Facebook').then(function() {
 Users often forget their passwords for your app. So you are provided with an API to reset their passwords.To start, you ask the user for his username and call
 
 ```objectivec
-Appacitive.Users.sendResetPasswordEmail("{username}", "{subject for the mail}").then(function(){
-  alert("Password reset mail sent successfully");
-});
+[user sendResetPasswordEmailWithSubject:@"APPACITIVE : Reset your password"];
 ```
 
-This'll basically send the user an email, with a reset password link. When user clicks on the link, he'll be redirected to an Appacitive page, which will allow him to enter new password and save it.
-
-You can also create a custom reset password page or provide a custom reset password page URL from our UI.
-
-On setting custom URL, the reset password link in the email will redirect user to that URL with a reset password token appended in the query string.
-
-```objectivec
-//consider your url is
-http://help.appacitive.com
-
-//after user clicks on the link, he'll be redirected to this url
-http://help.appacitive.com?token=dfwfer43243tfdhghfog909043094
-```
-The token provided in url can then be used to change the password for that user.
-
-So basically, following flow can be utilized for reset password
-
-1. Validate token specified in URL
-
-```objectivec
-Appacitive.Users.validateResetPasswordToken(token).then(function(user) {
-  //token is valid and json user object is returned for that token
-});
-```
-2.If valid then allow the user to enter his new password and save it
-```objectivec
-Appacitive.Users.resetPassword(token, newPassword).then(function() {
-  //password for user has been updated successfully
-});
-```
+This will send the user an email, with a reset password link. When user clicks on the link, he'll be redirected to an Appacitive page, which will allow him to enter new password and save it.
 
 #### Update Password
 Users need to change their passwords whenever they've compromised it. You can update it using this call:
+
 ```objectivec
-//You can make this call only for a loggedin user
-Appacitive.Users.current().updatePassword('{oldPassword}','{newPassword}').then(function(){
-  alert("Password updated successfully");
-});
+[user changePasswordFromOldPassword:@"0LDP4$$W0RD" toNewPassword:@"N3WP4$$W0RD"];});
 ```
 ### Check-in
 
-Users can check-in at a particular co-ordinate uing this call. Basically this call updates users location.
+Users can check-in at a particular co-ordinate using this call.
+
 ```objectivec
-Appacitive.Users.current().checkin(new Appacitive.GeoCoord(18.57, 75.55)).then(function() {
-  alert("Checked in successfully");
+[APUser setUserLocationToLatitude:@"23.27" longitude:@"72.30" forUserWithUserId:@"spencer.maguire"];
 });
 ```
 
@@ -1052,49 +965,38 @@ Appacitive.Users.current().checkin(new Appacitive.GeoCoord(18.57, 75.55)).then(f
 
 ### Configuring
 
-Sending emails from the sdk is quite easy. There are primarily two types of emails that can be sent
+Sending emails from the SDK is quite easy. There are primarily two types of emails that can be sent
 
 * Raw Emails
 * Templated Emails
 
-Email is accessed through the Appacitive.Email module. Before you get to sending emails, you need to configure smtp settings. You can either configure it from the portal or in the `Email` module with your mail provider's settings.
-
-```objectivec
-Appacitive.Email.setupEmail({
-username: /* username of the sender email account */,
-from: /* display name of the sender email account*/,
-password: /* password of the sender */,
-host: /* the smtp host, eg. smtp.gmail.com */,
-port: /* the smtp port, eg. 465 */,
-enablessl: /* is email provider ssl enabled, true or false, default is true */,
-replyto: /* the reply-to email address */
-});
-```
-Now you are ready to send emails.
+Email is accessed through the APEmail interface. Before you get to sending emails, you need to configure SMTP settings. You can either configure it from the portal or in the `APEmail` interface with your mail provider's settings.
 
 ### Sending Raw Emails
 
 A raw email is one where you can specify the entire body of the email. An email has the structure
 
 ```objectivec
-var email = {
-to: /* a string array containing the recipient email addresses */,
-cc: /* a string array containing the cc'd email addresses */,
-bcc: /* a string array containing the bcc'd email addresses */,
-from: /* email id of user */,
-subject: /* string containing the subject of the email */,
-body: /* html or string that will be the body of the email */,
-ishtml: /* bool value specifying the body is html or string, default is true */,
-useConfig: /* set true to use configure settings in email module in SDK */
-};
-```
+APEmail *emailObj = [[APEmail alloc] initWithRecipients:@[@"joe.stevens@mail.com", @"alicia.burke@mail.com", @"liam.jones@mail.com"] subject:@"Welcome to my app" body:@"Hey Guys, Welcome to app. Hope you enjoy the experience. Regards,Allan Matthews"];
 
-And to send the email
+//Sending email with default SMTP settings from Appacitive.
+[emailObj sendEmail];
 
-```objectivec
-Appacitive.Email.sendRawEmail(email).then(function (email) {
-alert('Successfully sent.');
+//Sending email with your email providers SMTP configuration parameters.
+[emailObj sendEmailUsingSMTPConfig:[APEmail makeSMTPConfigurationDictionaryWithUsername:@"allan.matthews" password:@"4V3NG3R$" host:@"smtp.email.com" port:@443 enableSSL:YES]];
 });
+
+//Alternative way for setting all the APEmail properties individually.
+APEmail *emailObj = [[APEmail alloc] init];
+emailObj.toRecipients = @[@"joe.stevens@mail.com", @"alicia.burke@mail.com", @"liam.jones@mail.com"];
+emailObj.ccRecipients = @[@"katherine.wesley@mail.com", @"jennifer.riley@mail.com", @"toby.salvadore@mail.com"];
+emailObj.bccRecipients = @[@"justin.stevenson@mail.com", @"phillip.jones@mail.com"];
+emailObj.subjectText = @"Welcome to my app.";
+emailObj.bodyText = @"Hey Guys, Welcome to app. Hope you enjoy the experience. Regards,Allan Matthews";
+emailObj.fromSender = @"allan.matthews@mail.com";
+emailObj.isHTMLBody = NO;
+emailObj.replyToEmail = @"jessica.osborne@mail.com";
+[emailObj sendEmail];
 ```
 
 ### Sending Templated Emails
@@ -1103,7 +1005,7 @@ You can also save email templates in Appacitive and use these templates for send
 
 For example, if you want to send an email to every new registration, it is useful to have an email template with placeholders for username and confirmation link.
 
-Consider we have created an email template where the templatedata is -
+Consider we have created an email template named `welcome_email` where the templatedata is -
 
 ```objectivec
 "Welcome [#username] ! Thank you for downloading [#appname]."
@@ -1112,36 +1014,28 @@ Consider we have created an email template where the templatedata is -
 Here, [#username] and [#appname] denote the placeholders that we would want to substitute while sending an email. An email has the structure
 
 ```objectivec
-var email = {
-to: /* a string array containing the recipient email addresses */,
-cc: /* a string array containing the cc'd email addresses */,
-bcc: /* a string array containing the bcc'd email addresses */,
-subject: /* string containing the subject of the email */,
-from: /* email id of user */,
-templateName: /*name of template to be send */,
-data: /*an object with placeholder names and their data eg: {username:"test"} */
-useConfig: /* set true to use configure settings in email module in SDK*/
-};
-```
-And to send the email,
-
-```objectivec
-Appacitive.Email.sendTemplatedEmail(email).then(function (email) {
-alert('Successfully sent.');
-});
+APEmail *emailObj = [[APEmail alloc] init];
+emailObj.toRecipients = @[@"joe.stevens@mail.com", @"alicia.burke@mail.com", @"liam.jones@mail.com"];
+emailObj.ccRecipients = @[@"katherine.wesley@mail.com", @"jennifer.riley@mail.com", @"toby.salvadore@mail.com"];
+emailObj.bccRecipients = @[@"justin.stevenson@mail.com", @"phillip.jones@mail.com"];
+emailObj.subjectText = @"Welcome to my app.";
+emailObj.bodyText = @"Hey Guys, Welcome to app. Hope you enjoy the experience. Regards,Allan Matthews";
+emailObj.fromSender = @"allan.matthews@mail.com";
+emailObj.isHTMLBody = NO;
+emailObj.replyToEmail = @"jessica.osborne@mail.com";
+emailObj.templateBody = @{@"username":@"Robin", @"appname":@"DealHunter"};
+[emailObj sendTemplatedEmailUsingTemplate:@"welcome_email"];
 ```
 
-`Note`: Emails are not transactional. This implies that a successful send operation would mean that your email provider was able to dispatch the email. It DOES NOT mean that the intended recipient(s) actually received that email.
+**NOTE**: Emails are not transactional. This implies that a successful send operation would mean that your email provider was able to dispatch the email. It DOES NOT mean that the intended recipient(s) actually received that email.
 
 ----------
 
 ## Push Notifications
 
-Using Appacitive platform you can send push notification to iOS devices, Android base devices and Windows phone.
+Using Appacitive platform you can send push notification to iOS, Android and Windows Phone devices.
 
 We recommend you to go through **[this](http://appacitive.github.io/docs/current/rest/push/index.html)** section, which explains how you can configure Appacitive app for Push notification. You will need to provide some basic one time configurations like certificates, using which we will setup push notification channels for different platforms for you. Also we provide a Push Console using which you can send push notification to the users.
-
-In Javascript SDK, static object `Appacitive.Push` provides methods to send push notification.
 
 Appacitive provides four ways to select the sender list
 
@@ -1151,138 +1045,60 @@ Appacitive provides four ways to select the sender list
 * To List of Channels
 * Query
 
-First we'll see how to send a push notification and then we will discuss the above methods with their options one by one.
-
-```objectivec
-var options = {..}; //Some options specific to senders
-Appacitive.Push.send(options).then(function(notification) {
-  alert('Push notification sent successfully');
-});
-```
-
 ### Broadcast
 
 If you want to send a push notification to all active devices, you can use the following options
 
 ```objectivec
-var options = {
-  "broadcast": true, // set this to true for broadcast
-  "platformoptions": {
-  // platform specific options
-"ios": {
-  "sound": "test"
-},
-"android": {
-  "title": "test title"
-}
-  },
-"data": {
-  // message to send
-"alert": "Push works!!!",
-    // Increment existing badge by 1
-"badge": "+1",
-    //Custom data field1 and field2
-"field1": "my custom value",
-    "field2": "my custom value"
-  },
-  "expireafter": "100000" // Expiry in seconds
-}
+APPushNotification *notification = [[APPushNotification alloc] initWithMessage:@"Bonjour!"];
+notification.isBroadcast = YES;
+[notification sendPushWithSuccessHandler:^{
+		NSLog(@"Push Sent!");
+} failureHandler:^(APError *error) {
+		NSLog(@"Error occurred: %@",[error description]);
+}];
 ```
 
 ### Platform specific Devices
 
-If you want to send push notifications to specific platforms, you can use this option. To do so you will need to provide the devicetype in the query.
+If you want to send push notifications to specific platforms, you can do so in the following way.
 
 ```objectivec
-var options = {
-  "query": "*devicetype == 'ios'",
-  "broadcast": false, // set this to true for broadcast
-  "platformoptions": {
-  // platform specific options
-"ios": {
-  "sound": "test"
-},
-"android": {
-  "title": "test title"
-}
-  },
-"data": {
-  // message to send
-"alert": "Push works!!!",
-    // Increment existing badge by 1
-"badge": "+1",
-    //Custom data field1 and field2
-"field1": "my custom value",
-    "field2": "my custom value"
-  },
-  "expireafter": "100000" // Expiry in seconds
-}
+APPushNotification *notification = [[APPushNotification alloc] initWithMessage:@"Bonjour!"];
+notification.query = [[[APQuery queryExpressionWithProperty:@"devicetype"] isEqualTo:@"ios"] stringValue];
+[notification sendPushWithSuccessHandler:^{
+	NSLog(@"Push Sent!");
+} failureHandler:^(APError *error) {
+	NSLog(@"Error occurred: %@",[error description]);
+}];
 ```
 
 ### Specific List of Devices
 
-If you want to send push notifications to specific devices, you can use this option. To do so you will need to provide the device ids.
+If you want to send push notifications to specific devices, will need to provide the device ids.
 
 ```objectivec
-var options = {
-  "deviceids": [
-"{deviceId}",
-"{deviceId2}",
-"{deviceId3}"
-  ],
-  "broadcast": false, // set this to true for broadcast
-  "platformoptions": {
-  // platform specific options
-"ios": {
-  "sound": "test"
-},
-"android": {
-  "title": "test title"
-}
-  },
-"data": {
-  // message to send
-"alert": "Push works!!!",
-    // Increment existing badge by 1
-"badge": "+1",
-    //Custom data field1 and field2
-"field1": "my custom value",
-    "field2": "my custom value"
-  },
-  "expireafter": "100000" // Expiry in seconds
-}
+APPushNotification *notification = [[APPushNotification alloc] initWithMessage:@"Bonjour!"];
+notification.deviceIds = @[@"23423432545", @"4353452352"];
+[notification sendPushWithSuccessHandler:^{
+	NSLog(@"Push sent to requested devices!"]);
+} failureHandler:^(APError *error) {
+	NSLog(@"Error occurred: %@",[error description]);
+}];
 ```
 
 ### To List of Channels
 
-Device object has a Channel property, using which you can club multiple devices. This is helpful if you want to send push notification using channel.
+You can also send PUSH messages to specific channels.
 
 ```objectivec
-var options = {
-  "channels": [
-"{nameOfChannel}"
-  ],
-  "broadcast": false, // set this to true for broadcast
-  "platformoptions": {
-  // platform specific options
-"ios": {
-  "sound": "test"
-},
-"android": {
-  "title": "test title"
-}
-  },
-"data": {
-  // message to send
-"alert": "Push works!!!",
-    // Increment existing badge by 1
-"badge": "+1",
-    //Custom data field1 and field2
-"field1": "my custom value",
-    "field2": "my custom value"
-  },
-  "expireafter": "100000" // Expiry in seconds
-}
+APPushNotification *notification = [[APPushNotification alloc] initWithMessage:@"Bonjour!"];
+notification.channels = @[@"updates", @"upgrades"];
+[notification sendPushWithSuccessHandler:^{
+		NSLog(@"Push sent on selected channels!");
+} failureHandler:^(APError *error) {
+		NSLog(@"Error occurred: %@",[error description]);
+}];
 ```
 
 ### Query
@@ -1290,28 +1106,13 @@ var options = {
 You can send push notifications to devices using a Query. All the devices which comes out as result of the query will receive the push notification.
 
 ```objectivec
-var options = {
-  "query": "{{add your query here}}",
-  "broadcast": false, // set this to true for broadcast
-  "platformoptions": {
-  // platform specific options
-"ios": {
-  "sound": "test"
-},
-"android": {
-  "title": "test title"
-}
-  },
-"data": {
-  // message to send
-"alert": "Push works!!!",
-    // Increment existing badge by 1
-"badge": "+1",
-    //Custom data field1 and field2
-"field1": "my custom value",
-    "field2": "my custom value"
-  },
-  "expireafter": "100000" // Expiry in seconds
+APPushNotification *notification = [[APPushNotification alloc] initWithMessage:@"Bonjour!"];
+notification.query = [[[APQuery queryExpressionWithProperty:@"devicetype"] isEqualTo:@"ios"] stringValue];
+[notification sendPushWithSuccessHandler:^{
+	NSLog(@"Push Sent!");
+} failureHandler:^(APError *error) {
+	NSLog(@"Error occurred: %@",[error description]);
+}];
 }
 ```
 
@@ -1319,114 +1120,21 @@ var options = {
 
 ## Files
 
-Appacitive supports file storage and provides api's for you to easily upload and download file. In the background we use amazon's S3 services for persistance. To upload or download files, the SDK provides `Appacitive.File` class, which you can instantiate to perform operations on file.
-
-### Creating Appacitive.File Object
-
-To construct an instance of `Appacitive.File` class, you must know the content type (mimeType) of the file because this is a required parameter. Optionally you can provide name/id of the file by which it will be saved on the server.
-
-Thses are the options you need to initialize a file object
-```objectivec
-var options = {
-  fileId: //  a unique string representing the filename on server,
-contentType: // Mimetype of file,
-fileData: // data to be uploaded, this could be bytes or HTML5 fileupload instance data
-};
-```
-
-If you don't provide contentType, then the SDK will try to get the MimeType from the HTML5 fileData object or it'll set it as 'text/plain'.
-
-To upload a file, the SDK provides three ways.
-
-#### Byte Stream
-
-If you have a byte stream, you can use the following interface to upload data.
-```objectivec
-var bytes = [ 0xAB, 0xDE, 0xCA, 0xAC, 0XAE ];
-
-//create file object
-var file = new Appacitive.File({
-  fileId: 'serverFile.png',
-fileData: bytes,
-contentType: 'image/png'
-});
-```
-
-#### HTML5 File Object
-
-If you've a fileupload control in your HTML5 app which allows the user to pick a file from their local drive to upload, you can simply create the object as
-```objectivec
-//consider this as your fileupload control
-<input type="file" id="imgUpload">
-
-//in a handler or in a function you could get a reference to it, if you've selected a file
-var fileData = $('#imgUpload')[0].files[0];
-
-//create file object
-var file = new Appacitive.File({
-  fileId: fileData.name,
-fileData: fileData
-});
-```
-Here, we gave the fileId as the name of the original file. There're three things to be noted :
-
-1. If you don't provide a fileId, a unique id for the file is generated and saved by the server.
-
-2. If you provide a fileId which already exists on the server, then on saving, this new file will replace the old file.
-
-3. If you don't provide contentType, then the SDK will infer it from the fileData object or set it as text/plain.
-
-#### Custom Upload
-
-If you want to upload a file without using SDK, you can get an upload URL by calling its instance method `getUploadUrl`, and simply upload your file onto this url.
-```objectivec
-file.getUploadUrl().then(function(url) {
-   //alert("Upload url:" + url);
-});
-```
+Appacitive supports file storage and provides api's for you to easily upload and download files. In the background we use amazon's S3 services for persistence. To upload or download files, the SDK provides `APFile` class, which you can instantiate to perform operations on file.
 
 ### Uploading
 
-Once you're done creating `Appacitive.File` object, simply call save to save it on the server.
 ```objectivec
-// save it on server
-file.save().then(function(url) {
-  alert('Download url is ' + url);
-});
-```
-
-After save, the onSuccess callback gets a url in response which can be saved in your object and is also reflected in the file object. This url is basically a download url which you could use to render it in your DOM.
-
-```objectivec
-//file object after upload
-{
-  fileId: 'test.png',
-  contentType: 'image/png',
-  url: '{{some url}}'
-}
-
-//if you don't provide fileId while upload, then you'll get a unique fileId set in you file object
-{
-  fileId: '3212jgfjs93798',
-  contentType: 'image/png',
-  url: '{{some url}}'
-}
+APFile *fileObj = [[APFile alloc] init];
+[fileObj uploadFileWithName:@"BannerImage" data:[NSData dataWithContentsOfFile:@"BannerImage.png"] validUrlForTime:@10 contentType:@"image/png"];
 ```
 
 ### Downloading
 
-Using the method `getDownloadUrl` in file object you can download a file which was uploaded to the Appacitive system.
-
-To construct the instance of `Appacitive.File`, you will need to provide the fileId of the file, which was returned by the system or set by you when you uploaded the file.
 ```objectivec
-//create file object
-var file = new Appacitive.File({
-  fileId: "test.png"
-});
-
-// call to get donwload url
-file.getDownloadUrl().then(function(url) {
-alert("Download url:" + url);
-$("#imgUpload").attr('src',file.url);
-});
+APFile *fileObj = [[APFile alloc] init];
+[fileObj downloadFileWithName:@"BannerImage" validUrlForTime:@10 successHandler:^(NSData *data) {
+    UIImage *bannerImage = [UIImage imageWithData:data];
+}];
 ```
+

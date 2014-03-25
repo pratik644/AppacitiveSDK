@@ -18,7 +18,7 @@
 
 @interface APEmail : NSObject
 
-@property (nonatomic, strong) NSMutableDictionary* templateBody;
+@property (nonatomic, strong) NSDictionary* templateBody;
 @property (nonatomic, strong) NSArray* toRecipients;
 @property (nonatomic, strong) NSArray* ccRecipients;
 @property (nonatomic, strong) NSArray* bccRecipients;
