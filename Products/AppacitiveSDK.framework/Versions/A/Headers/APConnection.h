@@ -338,7 +338,7 @@
 /**
  @see searchAllConnectionsWithRelationType:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Search for all APConnections of a particular relation type.
@@ -347,12 +347,12 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see searchAllConnectionsWithRelationType:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for APConnections and filters the result according to the query provided.
@@ -362,12 +362,12 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see searchAllConnectionsWithRelationType:byObjectId:withLabel:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for APConnections of a particular relation type by endpoint.
@@ -379,12 +379,12 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see searchAllConnectionsWithRelationType:fromObjectId:toObjectId:labelB:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for APConnections and from a specific object to a specific object.
@@ -397,12 +397,12 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see searchAllConnectionsFromObjectId:toObjectId:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for Connections between the single object and any of the objects in the list and returns the paginated list of all connections .
@@ -413,13 +413,13 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 
 /**
  @see searchAllConnectionsFromObjectId:toObjectIds:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for Connections between the single object and any of the objects in the list and returns the paginated list of all connections .
@@ -430,7 +430,7 @@
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /** @name Fetching APConnection */
 

@@ -432,7 +432,7 @@ APObject *Jane = [[APObject alloc] initWithTypeName:@"person" objectId:@"1234567
 APQuery *queryObj = [[APQuery alloc] init];
 queryObj.filterQuery = [[APQuery queryExpressionWithProperty:@"attending"] isEqualTo:@"true"];
 
-[APConnections searchAllConnectionsWithRelationType:@"invite" byObjectId:Jane.objectId withLabel:@"attendee" withQuery:[queryObj stringValue] successHandler:^(NSArray *objects) {
+[APConnections searchAllConnectionsWithRelationType:@"invite" byObjectId:Jane.objectId withLabel:@"attendee" withQuery:[queryObj stringValue] successHandler:^(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords) {
     NSLog(@"Attendees:");
     for(APObject *obj in objects)
         NSLog(@"%@ \n",[obj getPropertyWithKey:@"name"]);
@@ -452,7 +452,7 @@ Consider you want to check whether `John` and `Jane` are married, you can do it 
 ```objectivec
 //'marriage' is the relation between person type
 //and 'husband' and 'wife' are the endpoint labels
-[APConnections searchAllConnectionsWithRelationType:@"marriage" fromObjectId:@"22322" toObjectId:@"33422" labelB:@"wife" withQuery:nil successHandler:^(NSArray *objects) {
+[APConnections searchAllConnectionsWithRelationType:@"marriage" fromObjectId:@"22322" toObjectId:@"33422" labelB:@"wife" withQuery:nil successHandler:^(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords) {
         if([objects count] <= 0)
             NSLog(@"John and Jane are married");
         else
@@ -468,7 +468,7 @@ Consider you want to check whether `John` and `Jane` are married, you can do it 
 Consider `Jane` is connected to `John` via a `marriage` and a `friend` relationship. If we want to fetch all connections between them we could do this as
 
 ```objectivec
-[APConnections searchAllConnectionsFromObjectId:@"12345" toObjectId:@"67890" withQuery:nil successHandler:^(NSArray *objects) {
+[APConnections searchAllConnectionsFromObjectId:@"12345" toObjectId:@"67890" withQuery:nil successHandler:^(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords) {
     NSLog(@"John and Jane share the following relations:");
     for(APConnection *obj in objects)
         NSLog(@"\n%@",[obj description]);
@@ -482,7 +482,7 @@ On success, we get a list of all connections that connects `Jane` and `John`.
 Consider, `Jane` wants to what type of connections exists between her and a group of persons and houses , she could do this as
 
 ```objectivec
-[APConnections searchAllConnectionsFromObjectId:@"12345" toObjectIds:@[@"24356", @"56732", @"74657"] withQuery:nil successHandler:^(NSArray *objects) {
+[APConnections searchAllConnectionsFromObjectId:@"12345" toObjectIds:@[@"24356", @"56732", @"74657"] withQuery:nil successHandler:^(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords) {
         NSLog(@"Jane share the following relations:");
         for(APConnection *obj in objects)
             NSLog(@"\n%@",[obj description]);
@@ -534,7 +534,7 @@ APSimpleQuery *nameQuery = [[APQuery queryExpressionWithProperty:@"name"] isEqua
 APQuery *queryObj = [[APQuery alloc] init];
 queryObj.filterQuery = nameQuery;
 
-[APObject searchAllObjectsWithTypeName:@"user" withQuery:[queryObj stringValue] successHandler:^(NSArray *objects) {
+[APObject searchAllObjectsWithTypeName:@"user" withQuery:[queryObj stringValue] successHandler:^(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords) {
     NSLog(@"All users with John as their first name:");
     for(APObject *obj in objects) {
         NSLog(@"\n%@",[obj description]);
@@ -1124,8 +1124,18 @@ Appacitive supports file storage and provides api's for you to easily upload and
 
 ### Uploading
 
+You can download file directly.
+
 ```objectivec
 [APFile uploadFileWithName:@"BannerImage" data:[NSData dataWithContentsOfFile:@"BannerImage.png"] validUrlForTime:@10 contentType:@"image/png"];
+```
+
+If you wish to manage the upload process on your own, you can just fetch the upload URL.
+
+```objectivec
+[APFile getUploadURLForFileWithName:@"bannerImage.png" urlExpiresAfter:@10 contentType:@"image/png" successHandler:^(NSURL *url) {
+            NSLog(@"URL:%@",url);
+    }];
 ```
 
 ### Downloading
@@ -1136,3 +1146,10 @@ Appacitive supports file storage and provides api's for you to easily upload and
 }];
 ```
 
+If you wish to manage the download process on your own, you can just fetch the download URL.
+
+```objectivec
+[APFile getDownloadURLForFileWithName:@"bannerImage.png" urlExpiresAfter:@10 successHandler:^(NSURL *url) {
+	NSLog(@"URL:%@",url);
+    }];
+```

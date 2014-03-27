@@ -14,9 +14,19 @@
 typedef void (^APSuccessBlock)();
 
 /**
+ Success block expected for a success response that returns array of objects along with paging details.
+ */
+typedef void (^APPagedResultSuccessBlock)(NSArray *objects, NSInteger pageNumber, NSInteger pageSize, NSInteger totalRecords);
+
+/**
  Block parameter expected for a success response which returns an 'NSDictionary'.
  */
 typedef void (^APResultSuccessBlock)(NSDictionary *result);
+
+/**
+ Block parameter expected for a success response that returns an NSURL
+ */
+typedef void (^APURLSuccessBlock)(NSURL *url);
 
 /**
  Block parmaeter expected for a success response which returns an 'NSArray'.

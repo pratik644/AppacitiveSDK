@@ -672,15 +672,15 @@
 
 #pragma mark - Search methods
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APPagedResultSuccessBlock)successBlock {
     [APConnections searchAllConnectionsWithRelationType:relationType successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     [APConnections searchAllConnectionsWithRelationType:relationType withQuery:nil successHandler:successBlock failureHandler:failureBlock];
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     if(query == nil || ![[query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
         [self searchAllConnectionsWithRelationType:relationType withQuery:[NSString stringWithFormat:@"?objectid=%@&label=%@",objectId,label] successHandler:successBlock failureHandler:nil];
     } else {
@@ -688,7 +688,7 @@
     }
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType byObjectId:(NSString*)objectId withLabel:(NSString*)label withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     if(query == nil || ![[query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
         [self searchAllConnectionsWithRelationType:relationType withQuery:[NSString stringWithFormat:@"?objectid=%@&label=%@",objectId,label] successHandler:successBlock failureHandler:failureBlock];
     } else {
@@ -696,11 +696,11 @@
     }
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     [APConnections searchAllConnectionsWithRelationType:relationType withQuery:query successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     
     NSString *path = [CONNECTION_PATH stringByAppendingFormat:@"%@/find/all", relationType];
     
@@ -722,7 +722,7 @@
                 [connection setPropertyValuesFromDictionary:[[result objectForKey:@"connections"] objectAtIndex:i]];
                 [objects addObject:connection];
             }
-            successBlock(objects);
+            successBlock(objects,[[[result objectForKey:@"paginginfo"] valueForKey:@"pagenumber"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"pagesize"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"totalrecords"] integerValue]);
         }
     } failureHandler:^(APError *error) {
 		DLog(@"\n––––––––––––ERROR––––––––––––\n%@", error);
@@ -732,11 +732,11 @@
     }];
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     [APConnections searchAllConnectionsWithRelationType:relationType fromObjectId:objectAId toObjectId:objectBId labelB:labelB withQuery:query successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsWithRelationType:(NSString*)relationType fromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId labelB:(NSString*)labelB withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     
     NSString *path = [CONNECTION_PATH stringByAppendingString:[NSString stringWithFormat:@"%@/find/%@/%@",relationType,objectAId,objectBId]];
     
@@ -767,7 +767,7 @@
                 [connection setPropertyValuesFromDictionary:[[result objectForKey:@"connections"] objectAtIndex:i]];
                 [objects addObject:connection];
             }
-            successBlock(objects);
+            successBlock(objects,[[[result objectForKey:@"paginginfo"] valueForKey:@"pagenumber"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"pagesize"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"totalrecords"] integerValue]);
         }
     } failureHandler:^(APError *error) {
 		DLog(@"\n––––––––––––ERROR––––––––––––\n%@", error);
@@ -777,11 +777,11 @@
     }];
 }
 
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     [APConnections searchAllConnectionsFromObjectId:objectAId toObjectId:objectBId withQuery:query successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectAId toObjectId:(NSString *)objectBId withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     
     NSString *path = [CONNECTION_PATH stringByAppendingString:[NSString stringWithFormat:@"find/%@/%@",objectAId,objectBId]];
     
@@ -799,7 +799,7 @@
                 [connection setPropertyValuesFromDictionary:[[result objectForKey:@"connections"] objectAtIndex:i]];
                 [objects addObject:connection];
             }
-            successBlock(objects);
+            successBlock(objects,[[[result objectForKey:@"paginginfo"] valueForKey:@"pagenumber"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"pagesize"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"totalrecords"] integerValue]);
         }
     } failureHandler:^(APError *error) {
 		DLog(@"\n––––––––––––ERROR––––––––––––\n%@", error);
@@ -809,11 +809,11 @@
     }];
 }
 
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     [APConnections searchAllConnectionsFromObjectId:objectId toObjectIds:objectIds withQuery:query successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllConnectionsFromObjectId:(NSString *)objectId toObjectIds:(NSArray *)objectIds withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     
     NSString *path = [CONNECTION_PATH stringByAppendingString:@"interconnects"];
     
@@ -841,7 +841,7 @@
                 [connection setPropertyValuesFromDictionary:[[result objectForKey:@"connections"] objectAtIndex:i]];
                 [objects addObject:connection];
             }
-            successBlock(objects);
+            successBlock(objects,[[[result objectForKey:@"paginginfo"] valueForKey:@"pagenumber"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"pagesize"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"totalrecords"] integerValue]);
         }
     } failureHandler:^(APError *error) {
 		DLog(@"\n––––––––––––ERROR––––––––––––\n%@", error);

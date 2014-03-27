@@ -291,19 +291,19 @@ NSString *const OBJECT_PATH = @"v1.0/object/";
 
 #pragma mark - Search method
 
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APPagedResultSuccessBlock)successBlock {
     [APObject searchAllObjectsWithTypeName:typeName successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     [APObject searchAllObjectsWithTypeName:typeName withQuery:nil successHandler:successBlock failureHandler:failureBlock];
 }
 
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock {
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock {
     [APObject searchAllObjectsWithTypeName:typeName withQuery:query successHandler:successBlock failureHandler:nil];
 }
 
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock {
     
     NSString *path = [OBJECT_PATH stringByAppendingFormat:@"%@/find/all", typeName];
     
@@ -324,7 +324,7 @@ NSString *const OBJECT_PATH = @"v1.0/object/";
                 [tempObject setPropertyValuesFromDictionary:[[result objectForKey:@"objects"] objectAtIndex:i]];
                 [objects addObject:tempObject];
             }
-            successBlock(objects);
+            successBlock(objects,[[[result objectForKey:@"paginginfo"] valueForKey:@"pagenumber"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"pagesize"] integerValue], [[[result objectForKey:@"paginginfo"] valueForKey:@"totalrecords"] integerValue]);
         }
     } failureHandler:^(APError *error) {
         if(failureBlock != nil) {

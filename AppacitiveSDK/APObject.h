@@ -185,7 +185,7 @@ extern NSString *const OBJECT_PATH;
 /**
  @see searchAllObjectsWithTypeName:successHandler:failureHandler:
  */
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for all APObjects of a particular type.
@@ -193,12 +193,12 @@ extern NSString *const OBJECT_PATH;
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when search call fails.
  */
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 /**
  @see searchAllObjectsWithTypeName:withQuery:successHandler:failureHandler:
  */
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock;
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock;
 
 /**
  Searches for APObjects and filters the results according to the query string.
@@ -207,7 +207,7 @@ extern NSString *const OBJECT_PATH;
  @param successBlock Block invoked when the search call is successful.
  @param failureBlock Block invoked when the search call fails.
  */
-+ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APObjectsSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
++ (void) searchAllObjectsWithTypeName:(NSString*)typeName withQuery:(NSString*)query successHandler:(APPagedResultSuccessBlock)successBlock failureHandler:(APFailureBlock)failureBlock;
 
 
 /** @name Deleting APObject */
