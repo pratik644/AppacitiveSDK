@@ -21,7 +21,7 @@
 static NSMutableArray *parentIdStack;
 static NSMutableArray *parentTypeStack;
 static NSMutableArray *nodeStack;
-static NSMutableArray *childKeyStack;
+static NSMutableArray *mapKeyStack;
 
 #pragma mark - Get children method
 
@@ -126,10 +126,11 @@ static NSMutableArray *childKeyStack;
             NSArray *subDicts = [[objs lastObject] valueForKey:@"values"];
             APGraphNode *node = [[APGraphNode alloc] init];
             [node parseProjectionQueryResult:subDicts];
-            node = [nodeStack lastObject];
+            node = [nodeStack firstObject];
             nodeStack = nil;
             parentIdStack = nil;
             parentTypeStack = nil;
+            mapKeyStack = nil;
             successBlock(node);
         }
     } failureHandler:^(APError *error) {
@@ -143,23 +144,32 @@ static NSMutableArray *childKeyStack;
 #pragma mark - Private methods
 
 - (void) parseProjectionQueryResult:(NSArray*)objs{
+    
     NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [filePath stringByAppendingPathComponent:@"typeMapping.plist"];
     NSDictionary *typeMapping = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    //For each value in __values array
     for (NSDictionary *result in objs) {
-        if(parentIdStack == nil)
+        if(parentIdStack == nil) {
             parentIdStack = [[NSMutableArray alloc] init];
-        if(parentTypeStack == nil)
+        }
+        if(parentTypeStack == nil) {
             parentTypeStack = [[NSMutableArray alloc] init];
-        if(nodeStack == nil)
+        }
+        if(nodeStack == nil) {
             nodeStack = [[NSMutableArray alloc] init];
-        if(childKeyStack == nil)
-            childKeyStack =[[NSMutableArray alloc] init];
+        }
+        if(mapKeyStack == nil) {
+            mapKeyStack =[[NSMutableArray alloc] init];
+        }
+        
         APGraphNode *node;
         if(node == nil) {
             node = [[APGraphNode alloc] init];
             node.map = [[NSMutableDictionary alloc] init];
         }
+        
         if([[result allKeys] containsObject:@"__edge"]) {
             NSDictionary *edge = [result objectForKey:@"__edge"];
             NSMutableDictionary *endPointA = [[NSMutableDictionary alloc] init];
@@ -186,32 +196,43 @@ static NSMutableArray *childKeyStack;
                 object = [[NSClassFromString([typeMapping objectForKey:[result valueForKey:@"__type"]]) alloc] init];
             [object setPropertyValuesFromDictionary:result];
             node.object = object;
-            [parentIdStack addObject:object.objectId];
-            [parentTypeStack addObject:object.type];
         }
         
         if([[result allKeys] containsObject:@"__children"]) {
+            if([[result allKeys] containsObject:@"__type"]) {
+                [parentIdStack addObject:[result valueForKey:@"__id"]];
+                [parentTypeStack addObject:[result valueForKey:@"__type"]];
+            }
+            
             NSMutableArray *children = [[NSMutableArray alloc] init];
             [nodeStack addObject:node];
             
+            //for each child in __children dictionary
             for(NSString *key in [[result valueForKey:@"__children"] allKeys]) {
-                [childKeyStack addObject:key];
-                [node.map setValue:[children mutableCopy] forKey:key];
-                [self parseProjectionQueryResult:[[[result valueForKey:@"__children"] objectForKey:key] valueForKey:@"values"]];
+                if([[[[result valueForKey:@"__children"] objectForKey:key] valueForKey:@"values"] count] > 0) {
+                    [mapKeyStack addObject:key];
+                    if(![[node.map allKeys] containsObject:key])
+                        [node.map setValue:[children mutableCopy] forKey:key];
+                    [self parseProjectionQueryResult:[[[result valueForKey:@"__children"] objectForKey:key] valueForKey:@"values"]];
+                }
+            } //end of for loop for __children dictionary
+            
+            if([nodeStack count] > 1) {
+                [nodeStack removeLastObject];
             }
             
-            if([nodeStack count] > 1)
-                [nodeStack removeObject:[nodeStack lastObject]];
-            if([childKeyStack count] > 1)
-                [childKeyStack removeObject:[childKeyStack lastObject]];
-            [parentIdStack removeObject:[parentIdStack lastObject]];
-            [parentTypeStack removeObject:[parentTypeStack lastObject]];
+            if([mapKeyStack count] > 1) {
+                [mapKeyStack removeLastObject];
+            }
+            
+            [parentIdStack removeLastObject];
+            [parentTypeStack removeLastObject];
         }
         
-        if([nodeStack lastObject] != nil && [nodeStack lastObject] != node) {
-            [[((APGraphNode*)[nodeStack lastObject]).map valueForKey:[childKeyStack lastObject]] addObject:node];
+        if([nodeStack lastObject] != node) {
+            [[((APGraphNode*)[nodeStack lastObject]).map valueForKey:[mapKeyStack lastObject]] addObject:node];
         }
-    }
+    } //end of for loop __values array
 }
 
 @end
